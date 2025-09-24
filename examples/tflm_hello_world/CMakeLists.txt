@@ -1,0 +1,5 @@
+if (CMAKE_CHIP_TARGET MATCHES "^x86_linux$")
+    add_subdirectory(platform/x86_linux)
+else()
+    add_subdirectory(platform/ameba_rtos)
+endif()

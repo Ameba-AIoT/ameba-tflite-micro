@@ -1,0 +1,42 @@
+<OverriddenSettings>
+    <OverriddenSettingsEntry>
+        <key>tflm_hello_world</key>
+        <value path="tflm_hello_world">
+            <PreprocessorOptions>
+                <StringListMapOptions>
+                    <StringListMapEntry>
+                        <key>Includes</key>
+                        <value flag="-I" inheritance="prepend">
+                            <ListEntry>${workspace_loc}/../lib/tflite_micro/examples/tflm_hello_world</ListEntry>
+                        </value>
+                    </StringListMapEntry>
+                </StringListMapOptions>
+            </PreprocessorOptions>
+            <CompilerOptions>
+                <SingleFlagMapOptions>
+                    <SingleFlagMapEntry>
+                        <key>UseNewCPlusPlusLib</key>
+                        <value flag="-stdlib=libc++-re" use="true"/>
+                    </SingleFlagMapEntry>
+                    <SingleFlagMapEntry>
+                        <key>ISOStandard</key>
+                        <value flag="-std=c++17" use="true"/>
+                    </SingleFlagMapEntry>
+                </SingleFlagMapOptions>
+            </CompilerOptions>
+        </value>
+    </OverriddenSettingsEntry>
+    <OverriddenSettingsEntry>
+        <key>tflm_hello_world/platform</key>
+        <value path="tflm_hello_world/platform">
+            <CompilerOptions>
+                <SingleFlagMapOptions>
+                    <SingleFlagMapEntry>
+                        <key>ISOStandard</key>
+                        <value flag="none" use="false"/>
+                    </SingleFlagMapEntry>
+                </SingleFlagMapOptions>
+            </CompilerOptions>
+        </value>
+    </OverriddenSettingsEntry>
+</OverriddenSettings>
