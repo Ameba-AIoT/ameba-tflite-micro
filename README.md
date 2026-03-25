@@ -8,7 +8,7 @@ This repository is a version of the [TensorFlow Lite Micro library](https://www.
 
 Note that this repository is not recommended for standalone use. Please use it with SDK ([ameba-rtos](https://github.com/Ameba-AIoT/ameba-rtos) or [ameba-dsp](https://github.com/Ameba-AIoT/ameba-dsp)) based on the chosen SoC.
 
-Documentation: [ameba-tflite-micro](https://aiot.realmcu.com/en/latest/rtos/ai/tflm/1_ai_tflm_toprst.html)
+Documentation: [ameba-tflite-micro](https://aiot.realmcu.com/en/latest/rtos/ai/tflm/index.html)
 
 ### Supported SoCs
 
