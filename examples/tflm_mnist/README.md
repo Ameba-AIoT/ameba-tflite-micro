@@ -2,15 +2,21 @@
 
 ## Description
 
-The *MNIST* database (Modified National Institute of Standards and Technology database) is a large collection of handwritten digits. 
+The *MNIST* database (Modified National Institute of Standards and Technology database) is a large collection of handwritten digits.
 
 More detailed documentation: [ameba-tflite-micro](https://aiot.realmcu.com/docs/en/latest/rst_ai/tflm/1_ai_tflm_toprst.html#)
 
-## Supported IC
-1. AmebaSmart CA32 (SDK: ameba-rtos)
-2. AmebaLite KM4 (SDK: ameba-rtos)
-3. AmebaDplus KM4 (SDK: ameba-rtos)
-4. AmebaLite DSP (SDK: ameba-dsp)
+
+## Supported IC <a name = "supported-ic"></a>
+
+1. RTL8730E CA32 (SDK: ameba-rtos)
+2. RTL8721Dx KM4 (SDK: ameba-rtos)
+3. RTL8720E KM4 (SDK: ameba-rtos)
+4. RTL8710E KM4 (SDK: ameba-rtos)
+5. RTL8726E KM4 (SDK: ameba-rtos)
+6. RTL8726E DSP (SDK: ameba-dsp)
+7. RTL8713E KM4 (SDK: ameba-rtos)
+8. RTL8713E DSP (SDK: ameba-dsp)
 
 ## Build Example
 
@@ -96,7 +102,7 @@ More detailed documentation: [ameba-tflite-micro](https://aiot.realmcu.com/docs/
     cd /path/to/ameba-dsp/project/auto_build/
     ./auto_build.sh
     ```
-    
+
     binary image `dsp_all.bin` will be automatically generated under `/path/to/ameba-dsp/project/image/`.
 
     **NOTE: To build another example, please remove all added dependencies and linked resources from `Release.bts` and `.project`.**
@@ -129,7 +135,7 @@ FULLY_CONNECTED, 28897
 [TFLITE-MICRO] ~~~ALL TESTS PASSED~~~
 
 ```
-Note: 
+Note:
 
 1. results of arena size, ProfileMemoryAndLatency are platform dependent.
 2. in ameba-aiot, ticks in profile result actually represent as microseconds
