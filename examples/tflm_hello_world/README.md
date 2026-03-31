@@ -9,10 +9,14 @@ for Microcontrollers for running inference on a microcontroller.
 
 ## Supported IC <a name = "supported-ic"></a>
 
-1. AmebaSmart CA32 (SDK: ameba-rtos)
-2. AmebaLite KM4 (SDK: ameba-rtos)
-3. AmebaDplus KM4 (SDK: ameba-rtos)
-4. AmebaLite DSP (SDK: ameba-dsp)
+1. RTL8730E CA32 (SDK: ameba-rtos)
+2. RTL8721Dx KM4 (SDK: ameba-rtos)
+3. RTL8720E KM4 (SDK: ameba-rtos)
+4. RTL8710E KM4 (SDK: ameba-rtos)
+5. RTL8726E KM4 (SDK: ameba-rtos)
+6. RTL8726E DSP (SDK: ameba-dsp)
+7. RTL8713E KM4 (SDK: ameba-rtos)
+8. RTL8713E DSP (SDK: ameba-dsp)
 
 ## Build Example
 
