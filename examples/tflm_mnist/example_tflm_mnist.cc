@@ -15,7 +15,7 @@ limitations under the License.
 
 #include <math.h>
 
-#include "models/model_int8_tflm_optimized_model_data.h"
+#include "models/model_int8_model_data.h"
 #include "testdata/input_int8_test_data.h"
 #include "testdata/label_int8_test_data.h"
 #include "tensorflow/lite/core/c/common.h"
@@ -58,7 +58,7 @@ TfLiteStatus LoadQuantModelAndPerformInference() {
     // Map the model into a usable data structure. This doesn't involve any
     // copying or parsing, it's a very lightweight operation.
     const tflite::Model* model =
-        ::tflite::GetModel(g_model_int8_tflm_optimized_model_data);
+        ::tflite::GetModel(g_model_int8_model_data);
     TFLITE_CHECK_EQ(model->version(), TFLITE_SCHEMA_VERSION);
 
     MnistOpResolver op_resolver;

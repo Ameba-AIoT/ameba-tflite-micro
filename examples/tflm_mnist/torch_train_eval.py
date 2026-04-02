@@ -75,7 +75,7 @@ def test(model, device, test_loader):
 
     test_loss /= len(test_loader.dataset)
 
-    print('Test set: Average loss: {test_loss:.4f}, '\
+    print(f'Test set: Average loss: {test_loss:.4f}, '\
           f'Accuracy: {correct}/{len(test_loader.dataset)} '\
           f'({100. * correct / len(test_loader.dataset):.2f}%)')
 
@@ -86,6 +86,7 @@ def export_onnx(model, onnx_path, input_shape):
                       (dummy_input,),
                       onnx_path,
                       do_constant_folding=True,
+                      input_names=['input'],
                       export_params=True)
     check_consistency(model, onnx_path, input_shape)
 

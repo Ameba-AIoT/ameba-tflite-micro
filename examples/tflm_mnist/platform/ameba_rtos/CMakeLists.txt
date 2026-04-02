@@ -10,7 +10,7 @@ target_sources(
     ${example_dir}/testdata/input_int8_test_data.cc
     ${example_dir}/testdata/label_int8_test_data.cc
     ${example_dir}/example_tflm_mnist.cc
-    ${example_dir}/models/model_int8_tflm_optimized_model_data.cc
+    ${example_dir}/models/model_int8_model_data.cc
 
     app_example.c
 )

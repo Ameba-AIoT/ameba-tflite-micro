@@ -1,0 +1,12 @@
+numpy
+torch==2.4.1
+torchvision==0.19.1
+tensorflow==2.12.0
+keras==2.12.0
+keras_flops==0.1.2
+onnx==1.17
+onnxruntime==1.19.2
+ptflops
+Pillow
+onnx-tf==1.10.0
+tensorflow-probability
