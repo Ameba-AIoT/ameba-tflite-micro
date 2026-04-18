@@ -99,7 +99,10 @@ elseif (CMAKE_CHIP_TARGET MATCHES "amebalite_dsp")
   specialize_files(srcs_kernels "${tflite_micro_kernels_dir}/xtensa")
   set(rtk_nn_opt_include ${xtensa_opt_dir} ${xtensa_opt_dir}/include)
 
-elseif((CMAKE_CHIP_TARGET MATCHES "amebadplus_km4") OR (CMAKE_CHIP_TARGET MATCHES "amebalite_km4"))
+elseif((CMAKE_CHIP_TARGET MATCHES "amebadplus_km4") OR
+      (CMAKE_CHIP_TARGET MATCHES "amebalite_km4") OR
+      (CMAKE_CHIP_TARGET MATCHES "amebaL2_km4")
+      )
   set(USE_CMSIS_NN TRUE)
   include(${CMAKE_CURRENT_LIST_DIR}/cmsis-nn.cmake)
   specialize_files(srcs_kernels "${tflite_micro_kernels_dir}/cmsis_nn")
