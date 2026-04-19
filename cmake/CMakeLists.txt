@@ -65,7 +65,7 @@ ameba_add_subdirectory(${c_CMPT_TFLITE_DIR})
 ameba_port_standalone_internal_library(
     tensorflow-microlite    # The name of target in origin tflite who generates the library directly
 )
-if(CONFIG_AMEBALITE OR CONFIG_AMEBADPLUS)
+if(CONFIG_AMEBALITE OR CONFIG_AMEBADPLUS OR CONFIG_AMEBAL2)
     ameba_port_standalone_internal_library(
         cmsis-nn            # The name of target in origin tflite who generates the library directly
     )
