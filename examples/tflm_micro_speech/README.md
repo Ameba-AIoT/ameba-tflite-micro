@@ -24,8 +24,8 @@ For more details, please refer to [TensorFlow Lite for Microcontrollers](https:/
 
    ```ameba.py menuconfig <ic_name>``` (Replace with chip name, e.g. RTL8721Dx)
 
-   < MENUCONFIG FOR KM4 CONFIG  --->
-   < Audio Config  --->
+   < MENUCONFIG FOR General  --->
+   < AI Config  --->
    [*]  Enable TFLITE MICRO
 
 2. **Build and Download**:
