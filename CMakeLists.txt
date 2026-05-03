@@ -101,7 +101,8 @@ elseif (CMAKE_CHIP_TARGET MATCHES "amebalite_dsp")
 
 elseif((CMAKE_CHIP_TARGET MATCHES "amebadplus_km4") OR
       (CMAKE_CHIP_TARGET MATCHES "amebalite_km4") OR
-      (CMAKE_CHIP_TARGET MATCHES "amebaL2_km4")
+      (CMAKE_CHIP_TARGET MATCHES "amebaL2_km4") OR
+      (CMAKE_CHIP_TARGET MATCHES "amebagreen2_km4")
       )
   set(USE_CMSIS_NN TRUE)
   include(${CMAKE_CURRENT_LIST_DIR}/cmsis-nn.cmake)

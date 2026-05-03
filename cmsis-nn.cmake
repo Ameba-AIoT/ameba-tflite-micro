@@ -9,7 +9,7 @@ FetchContent_Declare(
   cmsis_nn
   SOURCE_DIR ${cmsis_nn_dir}
   URL      "http://github.com/ARM-software/CMSIS-NN/archive/${ZIP_PREFIX_NN}.zip"
-  URL_HASH MD5=${CMSIS_NN_MD5}
+  URL_HASH "MD5=${CMSIS_NN_MD5}"
   DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
