@@ -26,8 +26,8 @@ for Microcontrollers for running inference on a microcontroller.
 
     ```ameba.py menuconfig <ic_name>``` (Replace with chip name, e.g. RTL8721Dx)
 
-    < MENUCONFIG FOR KM4 CONFIG  --->
-    < Audio Config  --->
+    < MENUCONFIG FOR General  --->
+    < AI Config  --->
     [*]  Enable TFLITE MICRO
 
 2. **Build and Download**:
