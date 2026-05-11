@@ -26,7 +26,7 @@ More detailed documentation: [ameba-tflite-micro](https://aiot.realmcu.com/docs/
 
   ```ameba.py menuconfig <ic_name>``` (Replace with chip name, e.g. RTL8721Dx)
 
-  < MENUCONFIG FOR XXXX CONFIG  --->
+  < MENUCONFIG FOR General  --->
 
   < AI Config  --->
    [*]  Enable TFLITE MICRO
