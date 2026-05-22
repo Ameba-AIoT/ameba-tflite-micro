@@ -46,7 +46,8 @@ file(GLOB srcs_micro
   "${tflite_micro_dir}/mock_micro_graph.cc"
   "${tflite_micro_dir}/recording_micro_allocator.cc"
   "${tflite_micro_dir}/system_setup.cc"
-  "${tflite_micro_dir}/test_helpers.cc")
+  "${tflite_micro_dir}/test_helpers.cc"
+  "${tflite_micro_dir}/test_helper_custom_ops.cc")
 
 file(GLOB src_micro_frontend
   "${tflite_micro_frontend_dir}/*.c"
