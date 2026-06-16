@@ -50,7 +50,7 @@ cp -r "${TFLITE_LIB_DIR}"/tensorflow/lite/micro/ameba-aiot \
 cp -r "${TFLITE_LIB_DIR}"/tensorflow/lite/micro/kernels/ameba-aiot \
   "${TEMP_DIR}"/tflm-out/tensorflow/lite/micro/kernels/
 
-cp -r "${TEMP_DIR}"/tflite-micro/tensorflow/lite/micro/kernels/{cmsis_nn,xtensa} \
+cp -r "${TFLITE_LIB_DIR}"tensorflow/lite/micro/kernels/{cmsis_nn,xtensa} \
   "${TEMP_DIR}"/tflm-out/tensorflow/lite/micro/kernels/
 
 cd "${TFLITE_LIB_DIR}"
