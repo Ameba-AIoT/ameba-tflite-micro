@@ -52,8 +52,10 @@ set(private_compile_options)         #private compile_options
 
 #Some custom variables need to be transferred into tflite dir
 set(BUILD_IN_MCU_SDK TRUE)
-if(CONFIG_AMEBASMART)
+if(CONFIG_AMEBASMART AND c_MCU_TYPE STREQUAL "ca32")
     set(CMAKE_CHIP_TARGET amebasmart_ca32_freertos)
+elseif(CONFIG_RTL8720F)
+    set(CMAKE_CHIP_TARGET amebaL2_km4)
 else()
     set(CMAKE_CHIP_TARGET ${c_SOC_TYPE}_${c_MCU_TYPE})
 endif()
@@ -65,7 +67,8 @@ ameba_add_subdirectory(${c_CMPT_TFLITE_DIR})
 ameba_port_standalone_internal_library(
     tensorflow-microlite    # The name of target in origin tflite who generates the library directly
 )
-if(CONFIG_AMEBALITE OR CONFIG_AMEBADPLUS OR CONFIG_AMEBAL2 OR CONFIG_AMEBAGREEN2)
+if(CONFIG_AMEBALITE OR CONFIG_AMEBADPLUS OR CONFIG_AMEBAL2 OR CONFIG_AMEBAGREEN2 OR CONFIG_RTL8720F OR
+   (CONFIG_AMEBASMART AND c_MCU_TYPE STREQUAL "km4"))
     ameba_port_standalone_internal_library(
         cmsis-nn            # The name of target in origin tflite who generates the library directly
     )
