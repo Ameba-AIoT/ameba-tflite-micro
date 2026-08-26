@@ -2,7 +2,7 @@
 
 # Define the toolchain directory and SDK toolchain path
 set(ToolChainVerMajor asdk-10.3.1)
-set(ToolChainVerMinor 4354)
+set(ToolChainVerMinor 4602)
 set(TOOLCHAIN_DIR /opt/rtk-toolchain/${ToolChainVerMajor}-${ToolChainVerMinor})
 set(SDK_TOOLCHAIN ${TOOLCHAIN_DIR}/linux/newlib)
 
