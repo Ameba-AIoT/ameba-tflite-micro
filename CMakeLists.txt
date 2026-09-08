@@ -46,7 +46,8 @@ file(GLOB srcs_micro
   "${tflite_micro_dir}/mock_micro_graph.cc"
   "${tflite_micro_dir}/recording_micro_allocator.cc"
   "${tflite_micro_dir}/system_setup.cc"
-  "${tflite_micro_dir}/test_helpers.cc")
+  "${tflite_micro_dir}/test_helpers.cc"
+  "${tflite_micro_dir}/test_helper_custom_ops.cc")
 
 file(GLOB src_micro_frontend
   "${tflite_micro_frontend_dir}/*.c"
@@ -99,12 +100,11 @@ elseif (CMAKE_CHIP_TARGET MATCHES "amebalite_dsp")
   specialize_files(srcs_kernels "${tflite_micro_kernels_dir}/xtensa")
   set(rtk_nn_opt_include ${xtensa_opt_dir} ${xtensa_opt_dir}/include)
 
-elseif((CMAKE_CHIP_TARGET MATCHES "amebadplus_km4") OR
-      (CMAKE_CHIP_TARGET MATCHES "amebalite_km4") OR
-      (CMAKE_CHIP_TARGET MATCHES "amebaL2_km4") OR
-      (CMAKE_CHIP_TARGET MATCHES "amebagreen2_km4")
-      )
+elseif(CMAKE_CHIP_TARGET MATCHES "^(amebasmart|amebadplus|amebalite|amebaL2|amebagreen2)_km4$")
   set(USE_CMSIS_NN TRUE)
+  if(CMAKE_CHIP_TARGET MATCHES "amebasmart_km4")
+    set(CMSIS_NN_USE_MVE TRUE)
+  endif()
   include(${CMAKE_CURRENT_LIST_DIR}/cmsis-nn.cmake)
   specialize_files(srcs_kernels "${tflite_micro_kernels_dir}/cmsis_nn")
   set(rtk_nn_opt_include ${cmsis_nn_dir})
