@@ -768,6 +768,14 @@ size_t MicroAllocator::used_bytes() const {
          persistent_buffer_allocator_->GetPersistentUsedBytes();
 }
 
+size_t MicroAllocator::persistent_used_bytes() const {
+  return persistent_buffer_allocator_->GetPersistentUsedBytes();
+}
+
+size_t MicroAllocator::non_persistent_used_bytes() const {
+  return non_persistent_buffer_allocator_->GetNonPersistentUsedBytes();
+}
+
 TfLiteStatus MicroAllocator::AllocateNodeAndRegistrations(
     const Model* model, SubgraphAllocations* subgraph_allocations) {
   TFLITE_DCHECK(subgraph_allocations != nullptr);
@@ -1076,18 +1084,36 @@ TfLiteStatus MicroAllocator::AllocateVariables(
     if (tensor->is_variable()) {
       if (offline_planner_offsets == nullptr ||
           offline_planner_offsets[i] == kOnlinePlannedBuffer) {
-        size_t buffer_size;
-        TF_LITE_ENSURE_STATUS(
-            TfLiteEvalTensorByteLength(&eval_tensors[i], &buffer_size));
+        // If another is_variable tensor already claimed this flatbuffer buffer
+        // index, share its persistent allocation instead of allocating again.
+        // This lets paired state_in/state_out tensors occupy one buffer.
+        uint32_t buf_idx = tensor->buffer();
+        void* shared_ptr = nullptr;
+        for (size_t j = 0; j < i; ++j) {
+          auto* prev = subgraph->tensors()->Get(j);
+          if (prev->is_variable() && prev->buffer() == buf_idx &&
+              eval_tensors[j].data.data != nullptr) {
+            shared_ptr = eval_tensors[j].data.data;
+            break;
+          }
+        }
 
-        eval_tensors[i].data.data =
-            persistent_buffer_allocator_->AllocatePersistentBuffer(
-                buffer_size, MicroArenaBufferAlignment());
+        if (shared_ptr != nullptr) {
+          eval_tensors[i].data.data = shared_ptr;
+        } else {
+          size_t buffer_size;
+          TF_LITE_ENSURE_STATUS(
+              TfLiteEvalTensorByteLength(&eval_tensors[i], &buffer_size));
 
-        if (eval_tensors[i].data.data == nullptr) {
-          MicroPrintf("Failed to allocate variable tensor of size %d",
-                      buffer_size);
-          return kTfLiteError;
+          eval_tensors[i].data.data =
+              persistent_buffer_allocator_->AllocatePersistentBuffer(
+                  buffer_size, MicroArenaBufferAlignment());
+
+          if (eval_tensors[i].data.data == nullptr) {
+            MicroPrintf("Failed to allocate variable tensor of size %d",
+                        buffer_size);
+            return kTfLiteError;
+          }
         }
       }
     }
