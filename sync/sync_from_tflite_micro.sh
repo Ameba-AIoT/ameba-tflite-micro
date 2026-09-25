@@ -16,9 +16,6 @@
 #
 # Creates the project file distributions for the TensorFlow Lite Micro test and
 # example targets aimed at embedded platforms.
-trap 'rm -rf "$TEMP_DIR"' EXIT
-#set -e -x
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="${SCRIPT_DIR}/.."
 TFLITE_LIB_DIR="${ROOT_DIR}/"
@@ -26,6 +23,8 @@ DOWNLOADS_DIR="${TFLITE_LIB_DIR}/downloads"
 cd "${TFLITE_LIB_DIR}"
 
 TEMP_DIR=$(mktemp -p $SCRIPT_DIR -d)
+PRESERVE_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR" "$PRESERVE_DIR"' EXIT
 EXT_LIDS_DIR="${TEMP_DIR}/tflite-micro/tensorflow/lite/micro/tools/make/ext_libs"
 
 cd "${TEMP_DIR}"
@@ -50,14 +49,37 @@ cp -r "${TFLITE_LIB_DIR}"/tensorflow/lite/micro/ameba-aiot \
 cp -r "${TFLITE_LIB_DIR}"/tensorflow/lite/micro/kernels/ameba-aiot \
   "${TEMP_DIR}"/tflm-out/tensorflow/lite/micro/kernels/
 
-cp -r "${TEMP_DIR}"/tflite-micro/tensorflow/lite/micro/kernels/{cmsis_nn,xtensa} \
+cp -r "${TFLITE_LIB_DIR}"tensorflow/lite/micro/kernels/{cmsis_nn,xtensa} \
   "${TEMP_DIR}"/tflm-out/tensorflow/lite/micro/kernels/
 
 cd "${TFLITE_LIB_DIR}"
+
+# Preserve local modifications to these files before syncing
+PRESERVED_FILES=(
+  "tensorflow/lite/micro/micro_allocator.cc"
+  "tensorflow/lite/micro/micro_allocator.h"
+  "tensorflow/lite/micro/micro_interpreter.h"
+)
+# PRESERVE_DIR is intentionally outside TEMP_DIR so trap cannot delete it before restore
+for f in "${PRESERVED_FILES[@]}"; do
+  if [ -f "${TFLITE_LIB_DIR}/${f}" ]; then
+    mkdir -p "${PRESERVE_DIR}/$(dirname ${f})"
+    cp "${TFLITE_LIB_DIR}/${f}" "${PRESERVE_DIR}/${f}"
+  fi
+done
+
 rm -rf tensorflow
 rm -rf third_party
 rm -rf signal
 mv "${TEMP_DIR}/tflm-out/tensorflow" tensorflow
+
+# Restore preserved local modifications
+for f in "${PRESERVED_FILES[@]}"; do
+  if [ -f "${PRESERVE_DIR}/${f}" ]; then
+    cp "${PRESERVE_DIR}/${f}" "${TFLITE_LIB_DIR}/${f}"
+    echo "Restored local modification: ${f}"
+  fi
+done
 
 # update tflm_unittest only if the script exists
 if [ -f "${SCRIPT_DIR}/extract_tflm_unittest_srcs.sh" ]; then
