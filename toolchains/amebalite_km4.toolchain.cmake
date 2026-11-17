@@ -1,5 +1,8 @@
-set(TOOLCHAIN_DIR   /opt/rtk-toolchain/asdk-10.3.1)
-set(SDK_TOOLCHAIN  ${TOOLCHAIN_DIR}/linux/newlib)
+# Define the toolchain directory and SDK toolchain path
+set(ToolChainVerMajor asdk-10.3.1)
+set(ToolChainVerMinor 4602)
+set(TOOLCHAIN_DIR /opt/rtk-toolchain/${ToolChainVerMajor}-${ToolChainVerMinor})
+set(SDK_TOOLCHAIN ${TOOLCHAIN_DIR}/linux/newlib)
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
