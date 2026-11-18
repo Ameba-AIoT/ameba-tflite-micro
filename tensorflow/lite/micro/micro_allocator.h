@@ -256,6 +256,8 @@ class MicroAllocator {
   // Returns the arena usage in bytes, only available after
   // `FinishModelAllocation`. Otherwise, it will return 0.
   size_t used_bytes() const;
+  size_t persistent_used_bytes() const;
+  size_t non_persistent_used_bytes() const;
 
   TfLiteBridgeBuiltinDataAllocator* GetBuiltinDataAllocator();
 
